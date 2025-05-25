@@ -8,5 +8,6 @@
 * Persisting enums in JPA
 * Annotation-based auditing metadata (@CreatedDate)
 * lombook for less code
-* builder pattern using lookbook
+* builder pattern using lombook
 * @DataJpaTest
+* use record for dto objects

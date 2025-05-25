@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Builder
@@ -28,6 +29,8 @@ public class Loan {
     @Column(nullable = false)
     @CreatedDate
     private Instant createdAt;
+
+    private LocalDate dueDate;
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
