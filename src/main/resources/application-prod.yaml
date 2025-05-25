@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: postgresql://neondb_owner:npg_ITDG9muzYh6p@ep-shiny-glade-a8swvesu-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
