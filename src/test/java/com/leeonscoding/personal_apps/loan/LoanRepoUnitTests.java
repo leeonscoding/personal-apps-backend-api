@@ -4,6 +4,7 @@ import com.leeonscoding.personal_apps.entities.loan.CategoryType;
 import com.leeonscoding.personal_apps.entities.loan.Loan;
 import com.leeonscoding.personal_apps.entities.loan.StatusType;
 import com.leeonscoding.personal_apps.repositories.LoanRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class LoanRepoUnitTests {
         assertEquals(loan.getAmount(), testLoan.getAmount());
     }
 
+    @AfterEach
     public void tearDown() {
         loanRepository.delete(testLoan);
     }
