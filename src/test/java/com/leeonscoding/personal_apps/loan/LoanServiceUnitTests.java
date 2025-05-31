@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -39,4 +41,20 @@ public class LoanServiceUnitTests {
 
         assertEquals(newLoan.getName(), loan.name());
     }
+
+    @Test
+    void getAllTest() {
+        LoanDTO loanDTO1 = new LoanDTO(0, "mama", 10000, null, CategoryType.GIVE, StatusType.UNPAID);
+        LoanDTO loanDTO2 = new LoanDTO(0, "rafi", 2000, null, CategoryType.TAKE, StatusType.UNPAID);
+        LoanDTO loanDTO3 = new LoanDTO(0, "bou", 3000, null, CategoryType.TAKE, StatusType.UNPAID);
+
+        loanService.createLoan(loanDTO1);
+        loanService.createLoan(loanDTO2);
+        loanService.createLoan(loanDTO3);
+
+        List<LoanDTO> loans = loanService.getLoans();
+
+        assertEquals(4, loans.size());
+    }
+
 }

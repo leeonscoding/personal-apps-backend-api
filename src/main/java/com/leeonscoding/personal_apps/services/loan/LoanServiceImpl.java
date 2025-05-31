@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -27,7 +28,11 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public List<LoanDTO> getLoans() {
-        return List.of();
+        return loanRepository
+                .findAll()
+                .stream()
+                .map(this::entityToDto)
+                .collect(Collectors.toList());
     }
 
     private LoanDTO entityToDto(Loan loan) {
