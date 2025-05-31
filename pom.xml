@@ -76,6 +76,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>6.4.4.Final</version> <!-- Match your Hibernate version -->
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -89,7 +96,15 @@
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</path>
+						<path>
+							<groupId>org.hibernate.orm</groupId>
+							<artifactId>hibernate-jpamodelgen</artifactId>
+							<version>6.4.4.Final</version>
+						</path>
 					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-AaddGeneratedAnnotation=true</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
