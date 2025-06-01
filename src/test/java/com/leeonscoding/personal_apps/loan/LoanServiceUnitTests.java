@@ -52,9 +52,9 @@ public class LoanServiceUnitTests {
         loanService.createLoan(loanDTO2);
         loanService.createLoan(loanDTO3);
 
-        List<LoanDTO> loans = loanService.getLoans();
+        List<LoanDTO> loans = loanService.getLoans("bou");
 
-        assertEquals(4, loans.size());
+        assertEquals(1, loans.size());
     }
 
 }

@@ -10,5 +10,5 @@ public interface LoanService {
 
     LoanDTO getLoanById(long loanId);
 
-    List<LoanDTO> getLoans();
+    List<LoanDTO> getLoans(String name);
 }

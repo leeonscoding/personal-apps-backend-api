@@ -3,7 +3,9 @@ package com.leeonscoding.personal_apps.services.loan;
 import com.leeonscoding.personal_apps.dtos.loan.LoanDTO;
 import com.leeonscoding.personal_apps.entities.loan.Loan;
 import com.leeonscoding.personal_apps.repositories.LoanRepository;
+import com.leeonscoding.personal_apps.repositories.LoanSpecification;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -27,9 +29,16 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public List<LoanDTO> getLoans() {
+    public List<LoanDTO> getLoans(String name) {
+
+        Sort.TypedSort<Loan> loanSort = Sort.sort(Loan.class);
+
         return loanRepository
-                .findAll()
+                .findAll(LoanSpecification.byName(name),loanSort
+                        .by(Loan::getName)
+                        .and(loanSort
+                                .by(Loan::getAmount))
+                        .descending())
                 .stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());
