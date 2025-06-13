@@ -19,8 +19,8 @@ public class LoanServiceImpl implements LoanService {
     private final LoanRepository loanRepository;
 
     @Override
-    public Loan createLoan(LoanDTO loanDTO) {
-        return loanRepository.save(dtoToEntity(loanDTO));
+    public LoanDTO createLoan(LoanDTO loanDTO) {
+        return entityToDto(loanRepository.save(dtoToEntity(loanDTO)));
     }
 
     @Override
