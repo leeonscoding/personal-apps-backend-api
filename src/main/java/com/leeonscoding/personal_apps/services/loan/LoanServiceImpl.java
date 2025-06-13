@@ -1,11 +1,15 @@
 package com.leeonscoding.personal_apps.services.loan;
 
+import com.leeonscoding.personal_apps.dtos.SortOrders;
 import com.leeonscoding.personal_apps.dtos.loan.LoanDTO;
+import com.leeonscoding.personal_apps.dtos.loan.LoanSearchCriteria;
+import com.leeonscoding.personal_apps.dtos.loan.LoanSortFields;
 import com.leeonscoding.personal_apps.entities.loan.Loan;
 import com.leeonscoding.personal_apps.repositories.LoanRepository;
 import com.leeonscoding.personal_apps.repositories.LoanSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -29,16 +33,38 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public List<LoanDTO> getLoans(String name) {
+    public List<LoanDTO> getLoans(LoanSearchCriteria searchCriteria, LoanSortFields sortFields, SortOrders orders) {
+
+        Specification<Loan> loanSpecification = LoanSpecification
+                .byMonthAndYear(searchCriteria.month(), searchCriteria.year());
+
+        if (searchCriteria.name().isPresent()) {
+            loanSpecification = loanSpecification.and(LoanSpecification.byName(searchCriteria.name().get()));
+        }
+        if (searchCriteria.category().isPresent()) {
+            loanSpecification = loanSpecification.and(LoanSpecification.byCategory(searchCriteria.category().get()));
+        }
+        if (searchCriteria.status().isPresent()) {
+            loanSpecification = loanSpecification.and(LoanSpecification.byStatus(searchCriteria.status().get()));
+        }
 
         Sort.TypedSort<Loan> loanSort = Sort.sort(Loan.class);
+        Sort sort;
+
+        if (sortFields == LoanSortFields.MONTH) {
+            sort = loanSort.by(Loan::getCreatedAt);
+        } else {
+            sort = loanSort.by(Loan::getName);
+        }
+
+        if (orders == SortOrders.ASC) {
+            sort = loanSort.ascending();
+        } else {
+            sort = loanSort.descending();
+        }
 
         return loanRepository
-                .findAll(LoanSpecification.byName(name),loanSort
-                        .by(Loan::getName)
-                        .and(loanSort
-                                .by(Loan::getAmount))
-                        .descending())
+                .findAll(loanSpecification, sort)
                 .stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());

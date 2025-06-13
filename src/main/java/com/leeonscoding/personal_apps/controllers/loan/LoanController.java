@@ -1,14 +1,16 @@
 package com.leeonscoding.personal_apps.controllers.loan;
 
+import com.leeonscoding.personal_apps.dtos.SortOrders;
 import com.leeonscoding.personal_apps.dtos.loan.LoanDTO;
+import com.leeonscoding.personal_apps.dtos.loan.LoanSearchCriteria;
+import com.leeonscoding.personal_apps.dtos.loan.LoanSortFields;
 import com.leeonscoding.personal_apps.services.loan.LoanService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -22,5 +24,16 @@ public class LoanController {
         LoanDTO loan = loanService.createLoan(loanDTO);
 
         return new ResponseEntity<>(loan, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<LoanDTO>> getLoans(
+            LoanSearchCriteria searchCriteria,
+            LoanSortFields sort,
+            SortOrders order) {
+
+        List<LoanDTO> dtoList = loanService.getLoans(searchCriteria, sort, order);
+
+        return ResponseEntity.ok(dtoList);
     }
 }
