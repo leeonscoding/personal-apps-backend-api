@@ -41,4 +41,9 @@ public class LoanController {
     public ResponseEntity<LoanDTO> getLoan(@PathVariable long loanId) {
         return ResponseEntity.ok(loanService.getLoanById(loanId));
     }
+
+    @PutMapping("/{loanId}")
+    public ResponseEntity<LoanDTO> updateLoan(@PathVariable long loanId, @RequestBody LoanDTO loanDTO) {
+        return ResponseEntity.ok(loanService.updateLoan(loanId, loanDTO));
+    }
 }

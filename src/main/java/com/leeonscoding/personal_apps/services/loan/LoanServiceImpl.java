@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -68,6 +69,22 @@ public class LoanServiceImpl implements LoanService {
                 .stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public LoanDTO updateLoan(long loanId, LoanDTO loanDTO) {
+        Optional<Loan> loanOptional = loanRepository.findById(loanId);
+
+        if(loanOptional.isPresent()) {
+            Loan loan = loanOptional.get();
+            loan.setName(loanDTO.name());
+            loan.setAmount(loanDTO.amount());
+            loan.setCategoryType(loanDTO.categoryType());
+            loan.setStatusType(loanDTO.statusType());
+
+            return entityToDto(loanRepository.save(loan));
+        }
+        throw new RuntimeException("can't update");
     }
 
     private LoanDTO entityToDto(Loan loan) {
