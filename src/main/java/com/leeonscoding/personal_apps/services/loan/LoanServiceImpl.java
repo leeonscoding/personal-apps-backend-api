@@ -87,6 +87,11 @@ public class LoanServiceImpl implements LoanService {
         throw new RuntimeException("can't update");
     }
 
+    @Override
+    public void deleteLoan(long loanId) {
+        loanRepository.deleteById(loanId);
+    }
+
     private LoanDTO entityToDto(Loan loan) {
         return new LoanDTO(loan.getId(),
                 loan.getName(),

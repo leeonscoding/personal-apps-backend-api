@@ -37,13 +37,19 @@ public class LoanController {
         return ResponseEntity.ok(dtoList);
     }
 
-    @GetMapping("/{loanId}")
-    public ResponseEntity<LoanDTO> getLoan(@PathVariable long loanId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<LoanDTO> getLoan(@PathVariable("id") long loanId) {
         return ResponseEntity.ok(loanService.getLoanById(loanId));
     }
 
-    @PutMapping("/{loanId}")
-    public ResponseEntity<LoanDTO> updateLoan(@PathVariable long loanId, @RequestBody LoanDTO loanDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<LoanDTO> updateLoan(@PathVariable("id") long loanId, @RequestBody LoanDTO loanDTO) {
         return ResponseEntity.ok(loanService.updateLoan(loanId, loanDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLoan(@PathVariable("id") long loanId) {
+        loanService.deleteLoan(loanId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

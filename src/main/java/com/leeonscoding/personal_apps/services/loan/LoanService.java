@@ -15,4 +15,6 @@ public interface LoanService {
     List<LoanDTO> getLoans(LoanSearchCriteria searchCriteria, LoanSortFields sortFields, SortOrders orders);
 
     LoanDTO updateLoan(long loanId, LoanDTO loanDTO);
+
+    void deleteLoan(long loanId);
 }
