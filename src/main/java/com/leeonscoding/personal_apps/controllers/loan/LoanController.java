@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/loans")
-public class LoanControllers {
+public class LoanController {
 
     public final LoanService loanService;
 
