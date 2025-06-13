@@ -2,7 +2,6 @@ package com.leeonscoding.personal_apps.loan;
 
 import com.leeonscoding.personal_apps.dtos.loan.LoanDTO;
 import com.leeonscoding.personal_apps.entities.loan.CategoryType;
-import com.leeonscoding.personal_apps.entities.loan.Loan;
 import com.leeonscoding.personal_apps.entities.loan.StatusType;
 import com.leeonscoding.personal_apps.services.loan.LoanServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
