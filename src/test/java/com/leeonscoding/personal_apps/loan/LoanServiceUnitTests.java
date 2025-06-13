@@ -20,7 +20,7 @@ public class LoanServiceUnitTests {
     @Autowired
     private LoanServiceImpl loanService;
 
-    Loan newLoan = null;
+    LoanDTO newLoan = null;
 
     @BeforeEach
     void setup() {
@@ -31,15 +31,15 @@ public class LoanServiceUnitTests {
 
     @Test
     void createLoanTest() {
-        assertEquals("kosai", newLoan.getName());
-        assertEquals(7000, newLoan.getAmount());
+        assertEquals("kosai", newLoan.name());
+        assertEquals(7000, newLoan.amount());
     }
 
     @Test
     void getLoanByIdTest() {
-        LoanDTO loan = loanService.getLoanById(newLoan.getId());
+        LoanDTO loan = loanService.getLoanById(newLoan.id());
 
-        assertEquals(newLoan.getName(), loan.name());
+        assertEquals(newLoan.name(), loan.name());
     }
 
     @Test
