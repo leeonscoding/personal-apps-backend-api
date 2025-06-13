@@ -36,4 +36,9 @@ public class LoanController {
 
         return ResponseEntity.ok(dtoList);
     }
+
+    @GetMapping("/{loanId}")
+    public ResponseEntity<LoanDTO> getLoan(@PathVariable long loanId) {
+        return ResponseEntity.ok(loanService.getLoanById(loanId));
+    }
 }
