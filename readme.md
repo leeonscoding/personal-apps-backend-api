@@ -13,3 +13,4 @@
 * use record for dto objects
 * Use JPA annotation processor
 * Jpa sorting, specification
+* Global exception handler
